@@ -19,10 +19,20 @@
             position: relative;
         }
 
+        .title-container {
+            text-align: center;
+        }
+
         h1 {
             font-size: 5rem;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
             animation: glow 2s ease-in-out infinite alternate;
+            opacity: 1;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        h1.fade {
+            opacity: 0;
         }
 
         p {
@@ -34,6 +44,30 @@
             font-size: 2.5rem;
             margin-top: 40px;
             letter-spacing: 4px;
+        }
+
+        .buttons {
+            margin-top: 60px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .buttons a {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            transition: background 0.3s, transform 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .buttons a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
         }
 
         @keyframes glow {
@@ -64,11 +98,49 @@
     </style>
 </head>
 <body>
-    <h1>2026 新年快乐！</h1>
+    <div class="title-container">
+        <h1 id="greeting">2026 新年快乐！</h1>
+    </div>
     <p>Happy New Year 2026!</p>
     <div id="countdown"></div>
 
+    <div class="buttons">
+        <a href="https://www.bbc.com/news" target="_blank">BBC News</a>
+        <a href="https://www.cnn.com" target="_blank">CNN</a>
+        <a href="https://www.reuters.com" target="_blank">Reuters</a>
+        <a href="https://www.nytimes.com" target="_blank">NY Times</a>
+        <a href="https://www.theguardian.com" target="_blank">The Guardian</a>
+        <a href="https://news.cctv.com" target="_blank">央视新闻</a>
+    </div>
+
     <script>
+        // 多语言新年祝福列表
+        const greetings = [
+            "2026 新年快乐！",
+            "Happy New Year 2026!",
+            "Bonne Année 2026 !",
+            "Frohes Neues Jahr 2026!",
+            "明けましておめでとう 2026！",
+            "새해 복 많이 받으세요 2026!",
+            "سنة جديدة سعيدة ٢٠٢٦ !",
+            "สวัสดีปีใหม่ 2569 !"
+        ];
+
+        let currentIndex = 0;
+        const greetingElement = document.getElementById('greeting');
+
+        function changeGreeting() {
+            greetingElement.classList.add('fade');
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % greetings.length;
+                greetingElement.textContent = greetings[currentIndex];
+                greetingElement.classList.remove('fade');
+            }, 1500); // 与 CSS 过渡时间匹配
+        }
+
+        // 改为每 3 秒切换一次
+        setInterval(changeGreeting, 3000);
+
         // 倒计时到 2026年1月1日 00:00:00
         const newYear = new Date('2026-01-01T00:00:00');
 
@@ -83,4 +155,32 @@
 
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML =
+                `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 生成雪花
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = ['❄', '✨', '★'][Math.floor(Math.random() * 3)];
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
+            snowflake.style.fontSize = Math.random() * 1 + 1 + 'em';
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+
+        setInterval(createSnowflake, 300);
+    </script>
+</body>
+</html>
