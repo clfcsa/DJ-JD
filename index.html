@@ -1,186 +1,93 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 新年快乐！</title>
+    <title>Happy New Year 2026</title>
     <style>
         body {
-            margin: 0;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-            position: relative;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
         }
-
-        .title-container {
-            text-align: center;
-        }
-
         h1 {
-            font-size: 5rem;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-            animation: glow 2s ease-in-out infinite alternate;
-            opacity: 1;
-            transition: opacity 1.5s ease-in-out;
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: color 0.5s;
         }
-
-        h1.fade {
-            opacity: 0;
-        }
-
-        p {
-            font-size: 2rem;
-            margin-top: 20px;
-        }
-
-        #countdown {
-            font-size: 2.5rem;
-            margin-top: 40px;
-            letter-spacing: 4px;
-        }
-
         .buttons {
-            margin-top: 60px;
             display: flex;
-            gap: 20px;
             flex-wrap: wrap;
             justify-content: center;
+            gap: 10px;
         }
-
-        .buttons a {
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            transition: background 0.3s, transform 0.3s;
-            backdrop-filter: blur(5px);
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-
-        .buttons a:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.1);
+        button:hover {
+            background-color: #45a049;
         }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0080, 0 0 40px #ff0080;
-            }
-            to {
-                text-shadow: 0 0 20px #fff, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 50px #ff0080;
-            }
-        }
-
-        /* 雪花效果 */
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            color: #fff;
-            font-size: 1.5em;
-            opacity: 0.8;
-            pointer-events: none;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
+        /* For RTL languages like Arabic */
+        .rtl {
+            direction: rtl;
         }
     </style>
 </head>
 <body>
-    <div class="title-container">
-        <h1 id="greeting">2026 新年快乐！</h1>
-    </div>
-    <p>Happy New Year 2026!</p>
-    <div id="countdown"></div>
-
+    <h1 id="greeting">Happy New Year 2026</h1>
     <div class="buttons">
-        <a href="https://www.bbc.com/news" target="_blank">BBC News</a>
-        <a href="https://www.cnn.com" target="_blank">CNN</a>
-        <a href="https://www.reuters.com" target="_blank">Reuters</a>
-        <a href="https://www.nytimes.com" target="_blank">NY Times</a>
-        <a href="https://www.theguardian.com" target="_blank">The Guardian</a>
-        <a href="https://news.cctv.com" target="_blank">央视新闻</a>
+        <button onclick="window.open('https://news.google.com/', '_blank')">Google News</button>
+        <button onclick="window.open('https://www.cnn.com/', '_blank')">CNN</button>
+        <button onclick="window.open('https://www.bbc.com/news', '_blank')">BBC News</button>
+        <button onclick="window.open('https://www.nytimes.com/', '_blank')">New York Times</button>
+        <button onclick="window.open('https://www.reuters.com/', '_blank')">Reuters</button>
+        <button onclick="window.open('https://www.aljazeera.com/', '_blank')">Al Jazeera</button>
     </div>
 
     <script>
-        // 多语言新年祝福列表
         const greetings = [
-            "2026 新年快乐！",
-            "Happy New Year 2026!",
-            "Bonne Année 2026 !",
-            "Frohes Neues Jahr 2026!",
-            "明けましておめでとう 2026！",
-            "새해 복 많이 받으세요 2026!",
-            "سنة جديدة سعيدة ٢٠٢٦ !",
-            "สวัสดีปีใหม่ 2569 !"
+            { text: '2026新年快乐', lang: 'zh', dir: 'ltr' }, // Chinese
+            { text: 'Happy New Year 2026', lang: 'en', dir: 'ltr' }, // English
+            { text: 'Bonne Année 2026', lang: 'fr', dir: 'ltr' }, // French
+            { text: 'Frohes Neues Jahr 2026', lang: 'de', dir: 'ltr' }, // German
+            { text: '2026年あけましておめでとうございます', lang: 'ja', dir: 'ltr' }, // Japanese
+            { text: '2026 새해 복 많이 받으세요', lang: 'ko', dir: 'ltr' }, // Korean
+            { text: 'سنة جديدة سعيدة 2026', lang: 'ar', dir: 'rtl' }, // Arabic
+            { text: 'สวัสดีปีใหม่ 2026', lang: 'th', dir: 'ltr' } // Thai
         ];
 
-        let currentIndex = 0;
+        let index = 0;
         const greetingElement = document.getElementById('greeting');
 
-        function changeGreeting() {
-            greetingElement.classList.add('fade');
-            setTimeout(() => {
-                currentIndex = (currentIndex + 1) % greetings.length;
-                greetingElement.textContent = greetings[currentIndex];
-                greetingElement.classList.remove('fade');
-            }, 1500); // 与 CSS 过渡时间匹配
-        }
-
-        // 改为每 3 秒切换一次
-        setInterval(changeGreeting, 3000);
-
-        // 倒计时到 2026年1月1日 00:00:00
-        const newYear = new Date('2026-01-01T00:00:00');
-
-        function updateCountdown() {
-            const now = new Date();
-            const diff = newYear - now;
-
-            if (diff <= 0) {
-                document.getElementById('countdown').innerHTML = '新年到来！🎉';
-                return;
+        function switchGreeting() {
+            const current = greetings[index];
+            greetingElement.textContent = current.text;
+            greetingElement.lang = current.lang;
+            if (current.dir === 'rtl') {
+                greetingElement.classList.add('rtl');
+            } else {
+                greetingElement.classList.remove('rtl');
             }
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('countdown').innerHTML =
-                `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+            greetingElement.style.color = '#' + Math.floor(Math.random()*16777215).toString(16); // Random color for fun
+            index = (index + 1) % greetings.length;
         }
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // 生成雪花
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            snowflake.innerHTML = ['❄', '✨', '★'][Math.floor(Math.random() * 3)];
-            snowflake.style.left = Math.random() * 100 + 'vw';
-            snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
-            snowflake.style.fontSize = Math.random() * 1 + 1 + 'em';
-            document.body.appendChild(snowflake);
-
-            setTimeout(() => {
-                snowflake.remove();
-            }, 10000);
-        }
-
-        setInterval(createSnowflake, 300);
+        switchGreeting(); // Initial call
+        setInterval(switchGreeting, 3000); // Switch every 3 seconds
     </script>
 </body>
 </html>
